@@ -30,6 +30,7 @@ subplot(2,2,2), imagesc(nufblur, [0 255])
 axis image; colorbar
 title('blurred image image')
 
+%{
 new_Im = zeros(128,128);
 for i = 1:128
     for j = 1:128
@@ -40,6 +41,7 @@ for i = 1:128
         end
     end
 end
+%}
 
 subplot(2,2,3),imagesc(new_Im, [0 255])
 axis image; colorbar
@@ -51,14 +53,15 @@ axis image; colorbar
 title('new image')
 
 %%--------HISTOPART--------------------
-histo = hist(nuf(:),[0:255]);
 
+histo = hist(nuf(:),[0:255]);
+%{
 figure(2)
 bininvect=[0:1:255];
 histo=hist(nuf4b(:), bininvect);
 colormap(gray(256))
 plot(bininvect,histo,'.-b');
-
+%}
 T = mean(mean(nuf))
 Tmid = least_error(histo, T)
 imTmid = nuf>Tmid;
