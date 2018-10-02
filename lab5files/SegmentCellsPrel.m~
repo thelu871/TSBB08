@@ -107,7 +107,7 @@ title('segmentation');
 
 figure(13)
 CC=bwconncomp(waterholes,8);
-imagesc(watershed_meyer(D2,8,CC));
+imagesc(watershed_meyer(D2,8,CC)==6);
 title('Watershed meyer')
 colormap(jet), colorbar
 
@@ -170,7 +170,7 @@ imcircles = zeros(1000,1000);
 
 for i=1:1000
     for j=1:1000
-        if(IM(i,j) == 1 && image_dot_region(i,j) == 1)
+        if(IM(i,j) == 1 && in_dot_region(i,j) == 1)
             if(i < 995 &&  i > 5 && j > 5 && j < 995)
                 imcircles(i-5:i+4,j-5:j+4) = circle;
             end
@@ -185,6 +185,6 @@ im2(:,:,3) = (imcircles==1) .* 255 + (imcircles==0) .* im1b;
 
 figure(3)
 imshow(im2/255), axis image, colormap(jet), colorbar;
-title('Put circles');
+title('imregionalmax');
 
 sum(sum(IM))
